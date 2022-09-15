@@ -11,28 +11,36 @@
 #include "ns3/flow-monitor-module.h"
 #include <string>
 #include <vector>
+#include <fstream>
+#include "ns3/nstime.h"
 
 using namespace ns3;
 
 uint32_t nCsma = 20; //fix
-int tcpSegmentSize = 1472; //fix
+int tcpSegmentSize = 1448; //fix
 double simulationTime = 10; //fix
-std::string p2pDataRate = "5Mbps"; //var 5*0.5=2.5Mbps/8*1000000/10/1472
+std::string p2pDataRate = "5Mbps"; //var 5Mbps & 1Mbps
 std::string p2pDelay = "250ms"; //fix
-std::string queueSize = "21p"; //var  0.1BDP / 2BDP
-std::string CsmaDataRate = "100Mbps"; //fix
+std::string queueSize = "22p"; //var  0.1BDP / 2BDP
+std::string CsmaDataRate ="100Mbps"; //fix
 std::string CsmaDelay = "1ms"; //fix
 int totalBytes = 0; //var
-//std::string onOffDataRate = "100Mbps"; //fix
+int totalBytesSingle = 0; //var
+std::string onOffDataRate = "10Mbps"; //fix
 std::vector<double> queueUtilization;
-double queueMax = 21;
+std::vector<double> timestamp;
+double queueMax = 22;
+std::string offTime = "ns3::ConstantRandomVariable[Constant=3]";
+std::string onTime = "ns3::ConstantRandomVariable[Constant=1]";
+std::string fileName = "queueStat/5Mbps_0.1BDP_3off.txt";
 
 void
 DevicePacketsInQueueTrace (uint32_t oldValue, uint32_t newValue)
 {
-  std::cout << "DevicePacketsInQueue " << oldValue << " to " << newValue << std::endl;
   double tmp = (double)newValue / queueMax;
   queueUtilization.push_back(tmp);
+  Time curTime = Simulator::Now();
+  timestamp.push_back(curTime.GetSeconds());
 }
 
 int 
@@ -40,6 +48,9 @@ main (int argc, char *argv[])
 {
   Config::SetDefault ("ns3::TcpSocket::SegmentSize", UintegerValue (tcpSegmentSize));
 
+  CommandLine cmd (__FILE__);
+  cmd.Parse (argc, argv);
+  
   NodeContainer p2pNodes;
   p2pNodes.Create (2);
 
@@ -108,20 +119,26 @@ main (int argc, char *argv[])
 
   OnOffHelper senderOnoff("ns3::TcpSocketFactory", Ipv4Address::GetAny());
   senderOnoff.SetAttribute("PacketSize",UintegerValue(tcpSegmentSize));
-  senderOnoff.SetAttribute("OnTime", StringValue("ns3::ConstantRandomVariable[Constant=1]"));
-  senderOnoff.SetAttribute("OffTime",StringValue("ns3::ConstantRandomVariable[Constant=0]"));
-  //senderOnoff.SetAttribute("DataRate", StringValue(onOffDataRate));
+  senderOnoff.SetAttribute("OnTime", StringValue(onTime));
+  senderOnoff.SetAttribute("OffTime",StringValue(offTime));
+  senderOnoff.SetAttribute("DataRate", StringValue(onOffDataRate));
   senderOnoff.SetAttribute("MaxBytes", UintegerValue(totalBytes));
 
   ApplicationContainer senderApps;
-  for(int i=0;i<20;i++){
+  for(int i=0;i<19;i++){
     InetSocketAddress rmt(receiverInterfaces.GetAddress(i+1),9);
     rmt.SetTos(0xb8);
     AddressValue receiverAddress(rmt);
     senderOnoff.SetAttribute("Remote", receiverAddress);
-  
     senderApps.Add(senderOnoff.Install (senderNodes.Get(i+1)));
   }
+  
+  senderOnoff.SetAttribute("MaxBytes", UintegerValue(totalBytesSingle));
+  InetSocketAddress rmt(receiverInterfaces.GetAddress(20),9);
+  rmt.SetTos(0xb8);
+  AddressValue receiverAddress(rmt);
+  senderOnoff.SetAttribute("Remote", receiverAddress);
+  senderApps.Add(senderOnoff.Install (senderNodes.Get(20)));
   
   senderApps.Start (Seconds (0.0));
   senderApps.Stop (Seconds (simulationTime + 0.1));
@@ -137,29 +154,6 @@ main (int argc, char *argv[])
   //print simulation statistics
   Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
   std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats ();
-  /*
-  std::cout << std::endl << "*** Flow monitor statistics ***" << std::endl;
-  for(std::map<FlowId, FlowMonitor::FlowStats>::const_iterator iter = stats.begin(); iter != stats.end(); ++iter){
-    std::cout <<" Flow ID: "<<iter->first<<std::endl;
-    std::cout << "  Tx Packets/Bytes:   " << iter->second.txPackets
-            << " / " << iter->second.txBytes << std::endl;
-    std::cout << "  Offered Load: " << iter->second.txBytes * 8.0 / (iter->second.timeLastTxPacket.GetSeconds () - iter->second.timeFirstTxPacket.GetSeconds ()) / 1000000 << " Mbps" << std::endl;
-  std::cout << "  Rx Packets/Bytes:   " << iter->second.rxPackets
-            << " / " << iter->second.rxBytes << std::endl;
-  uint32_t packetsDroppedByQueueDisc = 0;
-  uint64_t bytesDroppedByQueueDisc = 0;
-  if (iter->second.packetsDropped.size () > Ipv4FlowProbe::DROP_QUEUE_DISC)
-    {
-      packetsDroppedByQueueDisc = iter->second.packetsDropped[Ipv4FlowProbe::DROP_QUEUE_DISC];
-      bytesDroppedByQueueDisc = iter->second.bytesDropped[Ipv4FlowProbe::DROP_QUEUE_DISC];
-    }
-  std::cout << "  Packets/Bytes Dropped by Queue Disc:   " << packetsDroppedByQueueDisc
-            << " / " << bytesDroppedByQueueDisc << std::endl;
-  std::cout << "  Throughput: " << iter->second.rxBytes * 8.0 / (iter->second.timeLastRxPacket.GetSeconds () - iter->second.timeFirstRxPacket.GetSeconds ()) / 1000000 << " Mbps" << std::endl;
-  std::cout << "  Mean delay:   " << iter->second.delaySum.GetSeconds () / iter->second.rxPackets << std::endl;
-  
-  }
-  */
   
   Simulator::Destroy ();
   
@@ -235,11 +229,18 @@ main (int argc, char *argv[])
   std::cout <<"Avg Delay/RTT "<<delaySum / 20<<" / "<<delaySum / 20 * 2<<std::endl;
   std::cout <<"Avg Goodput "<<avgGoodputSum / 20<<" Mbps"<<std::endl;
   std::cout <<std::endl;
-  std::cout <<"*** DropTailQueue Utilization ***"<<std::endl;
+  
+  std::ofstream ofs;
+  ofs.open(fileName,std::ios::out);
   for(std::vector<double>::iterator iter = queueUtilization.begin(); iter != queueUtilization.end(); iter++){
-    std::cout<<*iter<<" ";
+    ofs<<*iter<<" ";
   }
-  std::cout<<std::endl;
-
+  ofs<<std::endl;
+  for(std::vector<double>::iterator iter = timestamp.begin(); iter != timestamp.end(); iter++){
+    ofs<<*iter<<" ";
+  }
+  ofs<<std::endl;
+  ofs.close();
+  
   return 0;
 }

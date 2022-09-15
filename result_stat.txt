@@ -1,0 +1,157 @@
+1Mbps_0.1BDP_0off
+
+*** Total statistics ***
+Total TxPacket 1408
+Total TxBytes 2030992
+Total RxPacket 1171
+Total RxBytes 1675492
+Total DroppedPacket 216
+Total DroppedBytes 324000
+Avg Throughput 0.0490312 Mbps
+Avg Delay/RTT 0.369107 / 0.738214
+Avg Goodput 0.0618586 Mbps
+
+1Mbps_0.1BDP_3off
+
+*** Total statistics ***
+Total TxPacket 1203
+Total TxBytes 1719148
+Total RxPacket 974
+Total RxBytes 1375648
+Total DroppedPacket 204
+Total DroppedBytes 306000
+Avg Throughput 0.0385453 Mbps
+Avg Delay/RTT 0.382037 / 0.764074
+Avg Goodput 0.0518963 Mbps
+
+1Mbps_0.1BDP_1BigNode
+
+*** Total statistics ***
+Total TxPacket 516
+Total TxBytes 674060
+Total RxPacket 490
+Total RxBytes 636508
+Total DroppedPacket 26(1*0, 16*1, 2*1, 5*1)
+Total DroppedBytes 37552
+Avg Throughput 0.0262854 Mbps
+Avg Delay/RTT 0.398285 / 0.796571
+Avg Goodput 0.00611056 Mbps
+
+1Mbps_2BDP_0off
+
+*** Total statistics ***
+Total TxPacket 1483
+Total TxBytes 2137700
+Total RxPacket 1240
+Total RxBytes 1773200
+Total DroppedPacket 135
+Total DroppedBytes 202500
+Avg Throughput 0.0493203 Mbps
+Avg Delay/RTT 1.00417 / 2.00834
+Avg Goodput 0.0674189 Mbps
+
+1Mbps_2BDP_3off
+
+*** Total statistics ***
+Total TxPacket 1291
+Total TxBytes 1854044
+Total RxPacket 1033
+Total RxBytes 1467044
+Total DroppedPacket 153
+Total DroppedBytes 229500
+Avg Throughput 0.0417693 Mbps
+Avg Delay/RTT 0.995823 / 1.99165
+Avg Goodput 0.0554874 Mbps
+
+1Mbps_2BDP_1BigNode
+
+*** Total statistics ***
+Total TxPacket 482
+Total TxBytes 636200
+Total RxPacket 482
+Total RxBytes 636200
+Total DroppedPacket 0
+Total DroppedBytes 0
+Avg Throughput 0.0571494 Mbps
+Avg Delay/RTT 0.619757 / 1.23951
+Avg Goodput 0.00611056 Mbps
+
+5Mbps_0.1BDP_0off
+
+*** Total statistics ***
+Total TxPacket 5515
+Total TxBytes 8073280
+Total RxPacket 5348
+Total RxBytes 7822780
+Total DroppedPacket 125
+Total DroppedBytes 187500
+Avg Throughput 0.226572 Mbps
+Avg Delay/RTT 0.293584 / 0.587168
+Avg Goodput 0.301821 Mbps
+
+5Mbps_0.1BDP_3off
+
+*** Total statistics ***
+Total TxPacket 3359
+Total TxBytes 4808644
+Total RxPacket 3296
+Total RxBytes 4714144
+Total DroppedPacket 63
+Total DroppedBytes 94500
+Avg Throughput 0.15212 Mbps
+Avg Delay/RTT 0.289057 / 0.578113
+Avg Goodput 0.180073 Mbps
+
+
+5Mbps_0.1BDP_1BigNode
+
+*** Total statistics ***
+Total TxPacket 482
+Total TxBytes 636200
+Total RxPacket 482
+Total RxBytes 636200
+Total DroppedPacket 0
+Total DroppedBytes 0
+Avg Throughput 0.0863144 Mbps
+Avg Delay/RTT 0.284084 / 0.568168
+Avg Goodput 0.0244422 Mbps
+
+5Mbps_2BDP_0off
+
+*** Total statistics ***
+Total TxPacket 5975
+Total TxBytes 8633328
+Total RxPacket 5581
+Total RxBytes 8042328
+Total DroppedPacket 363
+Total DroppedBytes 544500
+Avg Throughput 0.243095 Mbps
+Avg Delay/RTT 0.788608 / 1.57722
+Avg Goodput 0.309293 Mbps
+
+5Mbps_2BDP_3off
+
+*** Total statistics ***
+Total TxPacket 3537
+Total TxBytes 5247660
+Total RxPacket 3324
+Total RxBytes 4928160
+Total DroppedPacket 213
+Total DroppedBytes 319500
+Avg Throughput 0.182831 Mbps
+Avg Delay/RTT 1.00375 / 2.0075
+Avg Goodput 0.131884 Mbps
+
+5Mbps_2BDP_1BigNode
+
+*** Total statistics ***
+Total TxPacket 482
+Total TxBytes 636200
+Total RxPacket 482
+Total RxBytes 636200
+Total DroppedPacket 0
+Total DroppedBytes 0
+Avg Throughput 0.0863144 Mbps
+Avg Delay/RTT 0.284084 / 0.568168
+Avg Goodput 0.0244422 Mbps
+
