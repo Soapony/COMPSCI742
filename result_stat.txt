@@ -27,15 +27,15 @@ Avg Goodput 0.0518963 Mbps
 1Mbps_0.1BDP_1BigNode
 
 *** Total statistics ***
-Total TxPacket 516
-Total TxBytes 674060
-Total RxPacket 490
-Total RxBytes 636508
-Total DroppedPacket 26(1*0, 16*1, 2*1, 5*1)
-Total DroppedBytes 37552
-Avg Throughput 0.0262854 Mbps
-Avg Delay/RTT 0.398285 / 0.796571
-Avg Goodput 0.00611056 Mbps
+Total TxPacket 1211
+Total TxBytes 1710708
+Total RxPacket 1014
+Total RxBytes 1415208
+Total DroppedPacket 197(13*1,12*1,11*1,10*9,9*7,8*1)
+Total DroppedBytes 295500
+Avg Throughput 0.0466938 Mbps
+Avg Delay/RTT 0.356157 / 0.712314
+Avg Goodput 0.0266142 Mbps
 
 1Mbps_2BDP_0off
 
@@ -66,15 +66,15 @@ Avg Goodput 0.0554874 Mbps
 1Mbps_2BDP_1BigNode
 
 *** Total statistics ***
-Total TxPacket 482
-Total TxBytes 636200
-Total RxPacket 482
-Total RxBytes 636200
-Total DroppedPacket 0
-Total DroppedBytes 0
-Avg Throughput 0.0571494 Mbps
-Avg Delay/RTT 0.619757 / 1.23951
-Avg Goodput 0.00611056 Mbps
+Total TxPacket 1337
+Total TxBytes 1893880
+Total RxPacket 1207
+Total RxBytes 1698880
+Total DroppedPacket 130(9*1,8*5,7*2,6*9,5*1,4*2)
+Total DroppedBytes 195000
+Avg Throughput 0.0613235 Mbps
+Avg Delay/RTT 0.8098 / 1.6196
+Avg Goodput 0.0319139 Mbps
 
 5Mbps_0.1BDP_0off
 
@@ -106,15 +106,15 @@ Avg Goodput 0.180073 Mbps
 5Mbps_0.1BDP_1BigNode
 
 *** Total statistics ***
-Total TxPacket 482
-Total TxBytes 636200
-Total RxPacket 482
-Total RxBytes 636200
-Total DroppedPacket 0
-Total DroppedBytes 0
-Avg Throughput 0.0863144 Mbps
-Avg Delay/RTT 0.284084 / 0.568168
-Avg Goodput 0.0244422 Mbps
+Total TxPacket 1582
+Total TxBytes 2265760
+Total RxPacket 1544
+Total RxBytes 2208760
+Total DroppedPacket 38(4*2,3*2,1*8,2*8)
+Total DroppedBytes 57000
+Avg Throughput 0.156185 Mbps
+Avg Delay/RTT 0.33055 / 0.661099
+Avg Goodput 0.0417314 Mbps
 
 5Mbps_2BDP_0off
 
@@ -145,13 +145,13 @@ Avg Goodput 0.131884 Mbps
 5Mbps_2BDP_1BigNode
 
 *** Total statistics ***
-Total TxPacket 482
-Total TxBytes 636200
-Total RxPacket 482
-Total RxBytes 636200
+Total TxPacket 3870
+Total TxBytes 5651052
+Total RxPacket 3870
+Total RxBytes 5651052
 Total DroppedPacket 0
 Total DroppedBytes 0
-Avg Throughput 0.0863144 Mbps
-Avg Delay/RTT 0.284084 / 0.568168
-Avg Goodput 0.0244422 Mbps
+Avg Throughput 0.248233 Mbps
+Avg Delay/RTT 0.3809 / 0.7618
+Avg Goodput 0.109005 Mbps
 
